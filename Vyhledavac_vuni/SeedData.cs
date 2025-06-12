@@ -7,6 +7,11 @@ namespace Vyhledavac_vuni
 {
   public class SeedData
   {
+    private static void SeedDataFragrances()
+    {
+      // Inicializace seznamu vůní s předdefinovanými daty
+
+      }
 
   }
 }
