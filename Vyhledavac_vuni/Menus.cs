@@ -14,7 +14,7 @@ namespace Vyhledavac_vuni
 
       do
       {
-        int choice = ManageInput.NumberFromUser(Instructions.Instructions0, 5);
+        int choice = ManageInput.ReadNumber(Instructions.Instructions0, 5);
 
         switch (choice)
         {
@@ -64,7 +64,7 @@ namespace Vyhledavac_vuni
 
       do
       {
-        int choice = ManageInput.NumberFromUser(Instructions.Instructions1, 8); // vypíše instrukce pro vyhledávání a načte vstup od uživatele zkontroluje vstup a vrátí číslo mezi 1 a 8
+        int choice = ManageInput.ReadNumber(Instructions.Instructions1, 8); // vypíše instrukce pro vyhledávání a načte vstup od uživatele zkontroluje vstup a vrátí číslo mezi 1 a 8
         switch (choice)
         {
           case 1:
