@@ -17,7 +17,7 @@ namespace Vyhledavac_vuni
     public static string Instructions13 = "Zadejte pohlaví (dámská, pánská, unisex): ";
     public static string Instructions14 = "Zadejte typ vůně (květinová, ovocná, citrusová, bylinná, mořská, orientální, pižmová, zemní, kouřová, kořeněná, dřevitá): ";
     public static string Instructions15 = "Zadejte 1 složku vůně: ";
-    public static string Instructions16 = "Zadejte 2 složky vůně oddělené středníkem: ";
+    public static string Instructions16 = "Zadejte 2 složky vůně oddělené čárkou: ";
     public static string Instructions17 = "Zadejte složku, kterou vůně neobsahuje: ";
     }
 }

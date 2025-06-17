@@ -86,29 +86,31 @@ namespace Vyhledavac_vuni
             }
           case 4:
             {
-              System.Console.WriteLine(Instructions.Instructions14);
+              Searching.FindByFragrType();
               //metoda pro vyhledávání podle typu vůně
               break;
             }
           case 5:
             {
+              Searching.FindByFragrComponent();
               //metoda pro vyhledávání podle 1 složky
               break;
             }
           case 6:
             {
+              Searching.FindBy2FragrComponents();
               //metoda pro vyhledávání podle 2 složek
               break;
             }
           case 7:
             {
+              Searching.FindByNotInclFragrComponent();
               //metoda pro vyhledávání podle složky kterou vůně neobsahuje
               break;
             }
           case 8:
             {
               return; // návrat do hlavního menu
-
             }
 
           default:
