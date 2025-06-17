@@ -48,7 +48,7 @@ namespace Vyhledavac_vuni
 
 
     // pohlaví (dámská, pánská, unisex):  
-    public enum FragranceForSex
+    public enum FragranceByGender
     {
       //[Description("Dámská")]
       Damska,
@@ -56,17 +56,17 @@ namespace Vyhledavac_vuni
       Panska,
       Unisex
     };
-    private FragranceForSex sex;
-    public FragranceForSex Sex
+    private FragranceByGender gender;
+    public FragranceByGender Gender
     {
-      get { return sex; }
+      get { return gender; }
       private set
       {
-        if (!Enum.IsDefined(typeof(FragranceForSex), value))
+        if (!Enum.IsDefined(typeof(FragranceByGender), value))
         {
           throw new ArgumentException("Neplatné pohlaví.");
         }
-        sex = value;
+        gender = value;
       }
     }
     // typ vůně (květinová, ovocná, citrusová, bylinná, mořská, orientální, pižmová, zemní, kouřová, kořeněná, dřevitá):
@@ -113,11 +113,11 @@ namespace Vyhledavac_vuni
       }
     }
     // konstruktor
-    public Fragrance(string name, FragranceConcentration fragranceConcentration, FragranceForSex sex, FragranceType type, List<string> componentsOfFragrance)
+    public Fragrance(string name, FragranceConcentration fragranceConcentration, FragranceByGender gender, FragranceType type, List<string> componentsOfFragrance)
     {
       Name = name;
       Concentration = fragranceConcentration;
-      Sex = sex;
+      Gender = gender;
       Type = type;
       ComponentsOfFragrance = componentsOfFragrance;
     }
