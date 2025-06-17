@@ -10,7 +10,7 @@ namespace Vyhledavac_vuni
   {
     public static List<Fragrance> fragrances = new List<Fragrance>();
 
-    private static void SeedDataFragrances()
+    public static void SeedDataFragrances()
     {
       fragrances.AddRange(new[]
       {

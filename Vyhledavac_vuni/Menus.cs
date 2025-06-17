@@ -20,7 +20,6 @@ namespace Vyhledavac_vuni
         {
           case 1:
             {
-              
               SearchMenu();
               break;
             }
@@ -32,7 +31,6 @@ namespace Vyhledavac_vuni
           case 3:
             {
               System.Console.WriteLine(Instructions.Instructions3);
-
               //metoda pro odstranění vůně
               break;
             }
@@ -69,7 +67,7 @@ namespace Vyhledavac_vuni
         {
           case 1:
             {
-              System.Console.WriteLine(Instructions.Instructions11);
+              FindByFragrName();
               //metoda pro vyhledávání podle názvu vůně
               break;
             }
@@ -119,6 +117,30 @@ namespace Vyhledavac_vuni
             }
         }
       } while (true);
+    }
+
+    private static void FindByFragrName()
+    {
+
+      string ReadInput = ManageInput.ReadInput(Instructions.Instructions11); // načte vstup od uživatele
+      string keyword = ReadInput.ToLowerInvariant();
+      var foundFragrances = SeedData.fragrances
+        .Where(f => f.Name.ToLowerInvariant().Contains(keyword))
+        .ToList();
+      if (foundFragrances.Count == 0)
+      {
+        Console.WriteLine("Žádná vůně nebyla nalezena.");
+      }
+      else
+      {
+        Console.WriteLine("Nalezené vůně:");
+        foreach (var fragrance in foundFragrances)
+        {
+          //výpis všech parametrů vůně
+          Console.WriteLine($"{fragrance.Name}; {fragrance.Concentration}; {fragrance.Sex}; {fragrance.Type}; {string.Join(", ", fragrance.ComponentsOfFragrance)}");
+        }
+      } 
+
     }
   }
 }

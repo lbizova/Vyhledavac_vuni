@@ -14,8 +14,8 @@ namespace Vyhledavac_vuni
       bool valid;
       do
       {
-try
-{
+        try
+        {
           Console.WriteLine(instructions);
           input = Console.ReadLine() ?? string.Empty;
           valid = true;
@@ -24,13 +24,13 @@ try
             Console.WriteLine("Neplatné zadání, vstup nemůže být prázdný. Zkuste to znovu. ");
             valid = false;
           }
-}
-catch (Exception ex)
-{
-  
-  Console.WriteLine($"Chyba při čtení vstupu: {ex.Message}. Zkuste to znovu.");
-  valid = false;
-}
+        }
+        catch (Exception ex)
+        {
+
+          Console.WriteLine($"Chyba při čtení vstupu: {ex.Message}. Zkuste to znovu.");
+          valid = false;
+        }
       }
       while (!valid);
       return input.Trim();
@@ -64,17 +64,6 @@ catch (Exception ex)
           }
       }
   }*/
-    /* pokud už nebude potřeba, vymazat.
-    private static int CheckInputInt(string input, int max)
-    {
-      if (!int.TryParse(input, out int nrOfChoice) || nrOfChoice < 1 || nrOfChoice > max)
-      {
-        Console.WriteLine("Neplatná volba. Zadejte číslo dle nabídky.");
-
-      }
-
-      return nrOfChoice;
-    }*/
     public static int ReadNumber(string instructions, int max)
     {
       string input;
@@ -95,7 +84,5 @@ catch (Exception ex)
       while (!valid);
       return nrOfChoice;
     }
-    //string input = ManageInput.ReadInput(Instructions.Instructions0); // vypíše instrukce pro hlavní menu a načte vstup od uživatele
-    //int choice = CheckInputInt(input, 1, 5); // zkontroluje vstup a vrátí číslo mezi 1 a 5
   }
 }

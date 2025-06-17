@@ -121,7 +121,7 @@ namespace Vyhledavac_vuni
       Type = type;
       ComponentsOfFragrance = componentsOfFragrance;
     }
-    // metoda pro seznam vůní:
+    
    
 
   }
