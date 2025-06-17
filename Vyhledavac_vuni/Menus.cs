@@ -14,7 +14,7 @@ namespace Vyhledavac_vuni
 
       do
       {
-        int choice = ManageInput.ReadNumber(Instructions.Instructions0, 5);
+        int choice = ManageInput.ReadNumber(Instructions.Instructions0, 6);
 
         switch (choice)
         {
@@ -25,7 +25,7 @@ namespace Vyhledavac_vuni
             }
           case 2:
             {
-              System.Console.WriteLine(Instructions.Instructions2);
+              AddFragrance();
               //metoda pro doplnění vůně
               break;
             }
@@ -37,18 +37,24 @@ namespace Vyhledavac_vuni
             }
           case 4:
             {
-              System.Console.WriteLine(Instructions.Instructions4);
-              //metoda pro uložení změn
+              PrintFragrancesNames();
+              //metoda pro výpis názvů vůní
               break;
             }
           case 5:
+            {
+              Console.WriteLine(Instructions.Instructions5);
+              //metoda pro uložení změn
+              break;
+            }
+          case 6:
             {
               Console.WriteLine("Program byl ukončen.");
               return;
             }
           default:
             {
-              Console.WriteLine("Neplatná volba. Zadejte číslo mezi 1 a 5.");
+              Console.WriteLine("Neplatná volba. Zadejte číslo mezi 1 a 6.");
               break;
             }
 
@@ -57,7 +63,7 @@ namespace Vyhledavac_vuni
     }
 
 
-
+    // 1. metoda pro menu vyhledávání vůní:
     public static void SearchMenu()
     {
 
@@ -122,6 +128,72 @@ namespace Vyhledavac_vuni
       } while (true);
     }
 
+    // 2. metoda pro menu doplnění vůně:
+    public static void AddFragrance()
+    {
+      string input = ManageInput.ReadInput(Instructions.Instructions2);
+      string[] parts = input.Split(';').Select(p => p.Trim()).ToArray();
+      if (parts.Length < 6)
+      {
+        Console.WriteLine("Zadejte všechny požadované informace o vůni oddělené středníkem.");
+        return;
+      }
+      string name = parts[0].Trim();
+      if (string.IsNullOrWhiteSpace(name))
+      {
+        Console.WriteLine("Název vůně nesmí být prázdný.");
+        return;
+      }
+      if (SeedData.fragrances.Any(f => f.Name.Equals(name, StringComparison.OrdinalIgnoreCase)))
+      {
+        Console.WriteLine("Vůně s tímto názvem již existuje.");
+        return;
+      }
+      if (!Enum.TryParse(parts[1].Trim(), true, out Fragrance.FragranceConcentration concentration))
+      {
+        Console.WriteLine("Neplatná koncentrace vůně. Zadejte Kolínská, EDT, EDP nebo Parfém.");
+        return;
+      }
+      if (!Enum.TryParse(parts[2].Trim(), true, out Fragrance.FragranceByGender gender))
+      {
+        Console.WriteLine("Neplatné pohlaví. Zadejte dámská, pánská nebo unisex.");
+        return;
+      }
+      if (!Enum.TryParse(parts[3].Trim(), true, out Fragrance.FragranceType type))
+      {
+        Console.WriteLine("Neplatný typ vůně. Zadejte květinová, ovocná, citrusová, bylinná, mořská, orientální, pižmová, zemní, kouřová, kořeněná nebo dřevitá.");
+        return;
+      }
+      List<string> components = parts.Skip(4).Select(c => c.Trim()).Where(c => !string.IsNullOrWhiteSpace(c)).ToList(); // Složky vůně začínají od indexu 4
+      if (components.Count < 2)
+      {
+        Console.WriteLine("Vůně musí obsahovat alespoň 2 složky.");
+        return;
+      }
+      // Vytvoření nové vůně
+      Fragrance newFragrance = new Fragrance(name, concentration, gender, type, components);
+      // Přidání nové vůně do seznamu
+      SeedData.fragrances.Add(newFragrance);
+      Console.WriteLine($"Vůně '{newFragrance.Name}' byla úspěšně přidána.");
+    }
+    
+         // 3. metoda pro menu odstranění vůně:
+    // 4. metoda pro menu výpis názvů vůní:
+    public static void PrintFragrancesNames()
+    {
+      Console.WriteLine("Seznam obsahuje následující vůně:");
+      //seřadí podle pohlaví a poté podle názvu vůně:
+      var sortedFragrances = SeedData.fragrances
+        .OrderBy(f => f.Gender)
+        .ThenBy(f => f.Name)
+        .ToList();
+      foreach (var fragrance in sortedFragrances)
+      {
+        Console.WriteLine($"{fragrance.Gender} vůně: {fragrance.Name}");
+      }
+    }
+    // 5. metoda pro menu uložení změn:
 
-  }
+
+ }
 }
