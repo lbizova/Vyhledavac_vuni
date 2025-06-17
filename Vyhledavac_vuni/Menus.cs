@@ -80,7 +80,7 @@ namespace Vyhledavac_vuni
             }
           case 3:
             {
-              System.Console.WriteLine(Instructions.Instructions13);
+              Searching.FindFragrByGender();
               //metoda pro vyhledávání podle pohlaví
               break;
             }

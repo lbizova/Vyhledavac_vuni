@@ -67,7 +67,38 @@ namespace Vyhledavac_vuni
     }
 
     //vyhledání podle pohlaví:
-    
+    public static void FindFragrByGender()
+    {
+      string input = ManageInput.ReadInput(Instructions.Instructions13);
+      string normalizedInput = RemoveDiacritics(input).ToLowerInvariant();
+      //pokud uživatel zadá pohlaví s diakritikou, tak se převede na malá písmena a odstraní se diakritika
+
+      if (Enum.TryParse(normalizedInput, true, out Fragrance.FragranceByGender gender))
+      {
+        var foundFragrances = SeedData.fragrances
+          .Where(f => f.Gender == gender)
+          .ToList();
+          if (foundFragrances.Count == 0)
+        {
+          Console.WriteLine("Žádná vůně pro toto pohlaví nebyla nalezena.");
+        }
+        else
+        {
+          Console.WriteLine("Nalezené vůně:");
+          foreach (var fragrance in foundFragrances)
+          {
+            //výpis všech parametrů vůně
+            PrintCompleteFragranceInfo(fragrance);
+          }
+        }
+      }
+      else
+      {
+        Console.WriteLine("Neplatné zadání pohlaví.");
+      
+    }
+    }
+    //pomocné metody:
     private static void PrintCompleteFragranceInfo(Fragrance fragrance)
     {
       Console.WriteLine($"{fragrance.Name}; {fragrance.Concentration}; {fragrance.Gender}; {fragrance.Type}; {string.Join(", ", fragrance.ComponentsOfFragrance)}");
