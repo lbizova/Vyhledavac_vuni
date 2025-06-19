@@ -63,7 +63,7 @@ namespace Vyhledavac_vuni
               Console.WriteLine($"Neplatný typ vůně: {parts[3]}");
               continue; // přeskočí řádek, pokud typ není platný
             }
-
+//odladit načtení všech složek vůně !!!
             List<string> components = parts.Length > 4 ? parts[4].Split(',').Select(c => c.Trim()).ToList() : new List<string>();
 
             Fragrance fragrance = new Fragrance(name, concentration, gender, type, components);
