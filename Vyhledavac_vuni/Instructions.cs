@@ -16,7 +16,7 @@ namespace Vyhledavac_vuni
     public static string Instructions11 = "Zadejte název vůně: ";
     public static string Instructions12 = "Zadejte koncentraci vůně (Kolínská, EDT, EDP, Parfém): ";
     public static string Instructions13 = "Zadejte pohlaví (dámská, pánská, unisex): ";
-    public static string Instructions14 = "Zadejte typ vůně (květinová, ovocná, citrusová, bylinná, mořská, orientální, pižmová, zemní, kouřová, kořeněná, dřevitá): ";
+    public static string Instructions14 = "Zadejte typ vůně (květinová, ovocná, citrusová, bylinná, mořská, orientální, pižmová, zemitá, kouřová, kořeněná, dřevitá, svěží): "; 
     public static string Instructions15 = "Zadejte 1 složku vůně: ";
     public static string Instructions16 = "Zadejte 2 složky vůně oddělené čárkou: ";
     public static string Instructions17 = "Zadejte složku, kterou vůně neobsahuje: ";

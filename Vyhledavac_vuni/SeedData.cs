@@ -8,11 +8,9 @@ namespace Vyhledavac_vuni
 {
   public class SeedData
   {
-    public static List<Fragrance> fragrances = new List<Fragrance>();
-
-    public static void SeedDataFragrances()
+      public static void SeedDataFragrances()
     {
-      fragrances.AddRange(new[]
+      FragranceRepository.fragrances.AddRange(new[]
       {
           new Fragrance ("Freya", Fragrance.FragranceConcentration.EDT, Fragrance.FragranceByGender.Damska, Fragrance.FragranceType.Citrusova, componentsOfFragrance: new List<string> {"Citron", "Grapefruit", "Pomeranč", "Jasmín", "Konvalinka", "Zázvor" }),
           new Fragrance ("Giordani Gold", Fragrance.FragranceConcentration.Parfem, Fragrance.FragranceByGender.Damska, Fragrance.FragranceType.Ovocna, componentsOfFragrance: new List<string> {"Mandarinka","Italský pomeranč", "Italský citron", "Madonina lilie", "Bílý jasmín", "Pomerančové kvítky", "Bílé pižmo", "Pačuli", "Mech" }),

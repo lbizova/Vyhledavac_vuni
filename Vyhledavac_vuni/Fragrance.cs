@@ -25,11 +25,11 @@ namespace Vyhledavac_vuni
     // koncentrace vůně (Kolínská, EDT, EDP, Parfém):
     public enum FragranceConcentration
     {
-      //[Description("Kolínská")]
+      [Description("Kolínská")]
       Kolinska,
       EDT,
       EDP,
-      //[Description("Parfém")]
+      [Description("Parfém")]
       Parfem
     };
     private FragranceConcentration concentration;
@@ -50,9 +50,9 @@ namespace Vyhledavac_vuni
     // pohlaví (dámská, pánská, unisex):  
     public enum FragranceByGender
     {
-      //[Description("Dámská")]
+      [Description("Dámská")]
       Damska,
-      //[Description("Pánská")]
+      [Description("Pánská")]
       Panska,
       Unisex
     };
@@ -69,20 +69,33 @@ namespace Vyhledavac_vuni
         gender = value;
       }
     }
-    // typ vůně (květinová, ovocná, citrusová, bylinná, mořská, orientální, pižmová, zemní, kouřová, kořeněná, dřevitá):
+    // typ vůně (květinová, ovocná, citrusová, bylinná, mořská, orientální, pižmová, zemitá, kouřová, kořeněná, dřevitá, svěží):
     public enum FragranceType
     {
+      [Description("Květinová")]
       Kvetinova,
+      [Description("Ovocná")]
       Ovocna,
+      [Description("Citrusová")]
       Citrusova,
+      [Description("Bylinná")]
       Bylinna,
+      [Description("Mořská")]
       Morska,
-      Orientani,
+      [Description("Orientální")]
+      Orientalni,
+      [Description("Pižmová")]
       Pizmova,
-      Zemni,
+      [Description("Zemitá")]
+      Zemita,
+      [Description("Kouřová")]
       Kourova,
+      [Description("Kořeněná")]
       Korenena,
-      Drevita
+      [Description("Dřevitá")]
+      Drevita,
+      [Description("Svěží")]
+      Svezi
     };
     private FragranceType type;
     public FragranceType Type

@@ -31,7 +31,7 @@ namespace Vyhledavac_vuni
             }
           case 3:
             {
-              System.Console.WriteLine(Instructions.Instructions3);
+              System.Console.WriteLine("Bude doplněno v další verzi. ");
               //metoda pro odstranění vůně
               break;
             }
@@ -43,7 +43,7 @@ namespace Vyhledavac_vuni
             }
           case 5:
             {
-              Console.WriteLine(Instructions.Instructions5);
+              Console.WriteLine("Bude doplněno v další verzi.  ");
               //metoda pro uložení změn
               break;
             }
@@ -144,7 +144,7 @@ namespace Vyhledavac_vuni
         Console.WriteLine("Název vůně nesmí být prázdný.");
         return;
       }
-      if (SeedData.fragrances.Any(f => f.Name.Equals(name, StringComparison.OrdinalIgnoreCase)))
+      if (FragranceRepository.fragrances.Any(f => f.Name.Equals(name, StringComparison.OrdinalIgnoreCase)))
       {
         Console.WriteLine("Vůně s tímto názvem již existuje.");
         return;
@@ -173,26 +173,29 @@ namespace Vyhledavac_vuni
       // Vytvoření nové vůně
       Fragrance newFragrance = new Fragrance(name, concentration, gender, type, components);
       // Přidání nové vůně do seznamu
-      SeedData.fragrances.Add(newFragrance);
+      FragranceRepository.fragrances.Add(newFragrance);
       Console.WriteLine($"Vůně '{newFragrance.Name}' byla úspěšně přidána.");
     }
+
+    // 3. metoda pro menu odstranění vůně:
     
-         // 3. metoda pro menu odstranění vůně:
+    //Bude doplněno v další verzi. Po nahrazení SeedData za soubor s vůněmi. 
     // 4. metoda pro menu výpis názvů vůní:
     public static void PrintFragrancesNames()
     {
       Console.WriteLine("Seznam obsahuje následující vůně:");
       //seřadí podle pohlaví a poté podle názvu vůně:
-      var sortedFragrances = SeedData.fragrances
+      var sortedFragrances = FragranceRepository.fragrances
         .OrderBy(f => f.Gender)
         .ThenBy(f => f.Name)
         .ToList();
       foreach (var fragrance in sortedFragrances)
       {
-        Console.WriteLine($"{fragrance.Gender} vůně: {fragrance.Name}");
+        Console.WriteLine($"{EnumHelper.GetDescription(fragrance.Gender)} vůně: {fragrance.Name}");
       }
     }
     // 5. metoda pro menu uložení změn:
+    //Bude doplněno v další verzi. Po nahrazení SeedData za soubor s vůněmi.
 
 
  }

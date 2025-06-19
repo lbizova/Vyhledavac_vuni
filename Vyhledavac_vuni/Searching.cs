@@ -2,8 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Globalization;
-using System.Text;
+
 
 namespace Vyhledavac_vuni
 {
@@ -14,7 +13,7 @@ namespace Vyhledavac_vuni
     {
       string input = ManageInput.ReadInput(Instructions.Instructions11); // načte vstup od uživatele
       string keyword = input.ToLowerInvariant();
-      var foundFragrances = SeedData.fragrances
+      var foundFragrances = FragranceRepository.fragrances
         .Where(f => f.Name.ToLowerInvariant().Contains(keyword))
         .ToList();
 
@@ -38,12 +37,12 @@ namespace Vyhledavac_vuni
     public static void FindByFragrConcentration()
     {
       string input = ManageInput.ReadInput(Instructions.Instructions12);
-      string normalizedInput = RemoveDiacritics(input).ToLowerInvariant();
+      string normalizedInput = Diacritics.RemoveDiacritics(input).ToLowerInvariant();
       //pokud uživatel zadá koncentraci s diakritikou, tak se převede na malá písmena a odstraní se diakritika
 
       if (Enum.TryParse(normalizedInput, true, out Fragrance.FragranceConcentration concentration))
       {
-        var foundFragrances = SeedData.fragrances
+        var foundFragrances = FragranceRepository.fragrances
           .Where(f => f.Concentration == concentration)
           .ToList();
         if (foundFragrances.Count == 0)
@@ -70,12 +69,12 @@ namespace Vyhledavac_vuni
     public static void FindFragrByGender()
     {
       string input = ManageInput.ReadInput(Instructions.Instructions13);
-      string normalizedInput = RemoveDiacritics(input).ToLowerInvariant();
+      string normalizedInput = Diacritics.RemoveDiacritics(input).ToLowerInvariant();
       //pokud uživatel zadá pohlaví s diakritikou, tak se převede na malá písmena a odstraní se diakritika
 
       if (Enum.TryParse(normalizedInput, true, out Fragrance.FragranceByGender gender))
       {
-        var foundFragrances = SeedData.fragrances
+        var foundFragrances = FragranceRepository.fragrances
           .Where(f => f.Gender == gender)
           .ToList();
         if (foundFragrances.Count == 0)
@@ -102,12 +101,12 @@ namespace Vyhledavac_vuni
     public static void FindByFragrType()
     {
       string input = ManageInput.ReadInput(Instructions.Instructions14);
-      string normalizedInput = RemoveDiacritics(input).ToLowerInvariant();
+      string normalizedInput = Diacritics.RemoveDiacritics(input).ToLowerInvariant();
       //pokud uživatel zadá typ s diakritikou, tak se převede na malá písmena a odstraní se diakritika
 
       if (Enum.TryParse(normalizedInput, true, out Fragrance.FragranceType type))
       {
-        var foundFragrances = SeedData.fragrances
+        var foundFragrances = FragranceRepository.fragrances
           .Where(f => f.Type == type)
           .ToList();
         if (foundFragrances.Count == 0)
@@ -136,7 +135,7 @@ namespace Vyhledavac_vuni
     {
       string input = ManageInput.ReadInput(Instructions.Instructions15).ToLowerInvariant();
 
-      var foundFragrances = SeedData.fragrances
+      var foundFragrances = FragranceRepository.fragrances
         .Where(f => f.ComponentsOfFragrance.Any(c => c.ToLowerInvariant().Contains(input)))
         .ToList();
       if (foundFragrances.Count == 0)
@@ -165,7 +164,7 @@ namespace Vyhledavac_vuni
         Console.WriteLine("Zadejte přesně dvě složky oddělené čárkou.");
         return;
       }
-      var foundFragrances = SeedData.fragrances
+      var foundFragrances = FragranceRepository.fragrances
         .Where(f => f.ComponentsOfFragrance.Count(c => components.Contains(c.ToLowerInvariant())) == 2)
         .ToList();
       if (foundFragrances.Count == 0)
@@ -188,7 +187,7 @@ namespace Vyhledavac_vuni
     {
       string input = ManageInput.ReadInput(Instructions.Instructions17).ToLowerInvariant();
 
-      var foundFragrances = SeedData.fragrances
+      var foundFragrances = FragranceRepository.fragrances
         .Where(f => !f.ComponentsOfFragrance.Any(c => c.ToLowerInvariant().Contains(input)))
         .ToList();
       if (foundFragrances.Count == 0)
@@ -216,12 +215,6 @@ namespace Vyhledavac_vuni
     private static void PrintPartialFragranceInfo(Fragrance fragrance)
     {
       Console.WriteLine($"{fragrance.Name}; {fragrance.Concentration}; {fragrance.Gender}");
-    }
-    private static string RemoveDiacritics(string text)  // navrženo AI - prostudovat.
-    {
-      var normalized = text.Normalize(NormalizationForm.FormD);
-      var chars = normalized.Where(c => CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark);
-      return new string(chars.ToArray()).Normalize(NormalizationForm.FormC);
     }
 
   }
