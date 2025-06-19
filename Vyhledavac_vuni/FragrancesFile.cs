@@ -44,27 +44,35 @@ namespace Vyhledavac_vuni
           if (parts.Length >= 4)
           {
             string name = parts[0];
-            //převedení koncentrace, pohlaví a typu vůně na text bez diakritiky a následně enum tolerantní k velikosti písmen
+            //převedení koncentrace, pohlaví a typu vůně na text bez diakritiky a tolerantní k velikosti písmen
             Fragrance.FragranceConcentration concentration;
-            if (!Enum.TryParse(Diacritics.RemoveDiacritics(parts[1]), true, out concentration))
+            if (!Enum.TryParse(Diacritics.RemoveDiacritics(parts[1].Trim().ToLowerInvariant()), true, out concentration))
             {
               Console.WriteLine($"Neplatná koncentrace: {parts[1]}");
               continue; // přeskočí řádek, pokud koncentrace není platná
             }
             Fragrance.FragranceByGender gender;
-            if (!Enum.TryParse(Diacritics.RemoveDiacritics(parts[2]), true, out gender))
+            if (!Enum.TryParse(Diacritics.RemoveDiacritics(parts[2]).Trim().ToLowerInvariant(), true, out gender))
             {
               Console.WriteLine($"Neplatné pohlaví: {parts[2]}");
               continue; // přeskočí řádek, pokud pohlaví není platné
             }
             Fragrance.FragranceType type;
-            if (!Enum.TryParse(Diacritics.RemoveDiacritics(parts[3]), true, out type))
+            if (!Enum.TryParse(Diacritics.RemoveDiacritics(parts[3].Trim().ToLowerInvariant()), true, out type))
             {
               Console.WriteLine($"Neplatný typ vůně: {parts[3]}");
               continue; // přeskočí řádek, pokud typ není platný
             }
-//odladit načtení všech složek vůně !!!
-            List<string> components = parts.Length > 4 ? parts[4].Split(',').Select(c => c.Trim()).ToList() : new List<string>();
+            //odladit načtení všech složek vůně !!!
+            List<string> components = new();
+            for (int i = 4; i < parts.Length; i++)
+            {
+              if (!string.IsNullOrWhiteSpace(parts[i]))
+              {
+                components.Add(parts[i].Trim());
+              }
+            }
+
 
             Fragrance fragrance = new Fragrance(name, concentration, gender, type, components);
             fragrances.Add(fragrance);

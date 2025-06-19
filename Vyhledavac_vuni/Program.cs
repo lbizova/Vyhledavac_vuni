@@ -10,6 +10,9 @@ class Program
     //načtení dat ze souboru:
     FragrancesFile fragrancesFile = new FragrancesFile();
     fragrancesFile.CheckDirectory();
+    string welcomeMessage = "\n Vítejte v aplikaci pro vyhledávání vůní a správu seznamu vůní. \n";
+    Console.WriteLine(welcomeMessage.ToUpper());
+    
     FragranceRepository.fragrances = fragrancesFile.LoadFragrancesFromFile("Seznam_vuni_se_slozkami_50radku.csv"); // větší soubor má v názvu 135radku, menší 50radku
 
     //pokud není soubor s vůněmi, tak se použijí seed data:
@@ -23,7 +26,7 @@ class Program
       Console.WriteLine($"Načteno {FragranceRepository.fragrances.Count} vůní ze souboru.");
     }
 
-    Console.WriteLine("Vítejte v aplikaci pro vyhledávání vůní a správu seznamu vůní.");
+    
     Menus.MainMenu();
     
 
