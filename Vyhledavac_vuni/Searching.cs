@@ -75,8 +75,8 @@ namespace Vyhledavac_vuni
       if (Enum.TryParse(normalizedInput, true, out Fragrance.FragranceByGender gender))
       {
         var foundFragrances = FragranceRepository.fragrances
-          .Where(f => f.Gender == gender)
-          .ToList();
+          .Where(f => f.Gender == gender) 
+          .ToList(); 
         if (foundFragrances.Count == 0)
         {
           Console.WriteLine("Žádná vůně pro toto pohlaví nebyla nalezena.");
@@ -210,11 +210,11 @@ namespace Vyhledavac_vuni
     //pomocné metody:
     private static void PrintCompleteFragranceInfo(Fragrance fragrance)
     {
-      Console.WriteLine($"{fragrance.Name}; {fragrance.Concentration}; {fragrance.Gender}; {fragrance.Type}; {string.Join(", ", fragrance.ComponentsOfFragrance)}");
+      Console.WriteLine($"{fragrance.Name}; {EnumHelper.GetDescription (fragrance.Concentration)}; {EnumHelper.GetDescription (fragrance.Gender)}; {EnumHelper.GetDescription (fragrance.Type)}; {string.Join(", ", fragrance.ComponentsOfFragrance)}");
     }
     private static void PrintPartialFragranceInfo(Fragrance fragrance)
     {
-      Console.WriteLine($"{fragrance.Name}; {fragrance.Concentration}; {fragrance.Gender}");
+      Console.WriteLine($"{fragrance.Name}; {EnumHelper.GetDescription (fragrance.Concentration)}; {EnumHelper.GetDescription (fragrance.Gender)}");
     }
 
   }

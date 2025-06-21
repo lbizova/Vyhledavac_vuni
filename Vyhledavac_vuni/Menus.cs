@@ -144,24 +144,14 @@ namespace Vyhledavac_vuni
         Console.WriteLine("Název vůně nesmí být prázdný.");
         return;
       }
-      if (FragranceRepository.fragrances.Any(f => f.Name.Equals(name, StringComparison.OrdinalIgnoreCase)))
+      
+      if (!CheckFragranceName.IsFragranceNameUnique(name))
       {
-        Console.WriteLine("Vůně s tímto názvem již existuje.");
         return;
       }
-      if (!Enum.TryParse(parts[1].Trim(), true, out Fragrance.FragranceConcentration concentration))
+
+      if (TryParseToEnumUserInput(parts, out Fragrance.FragranceConcentration concentration, out Fragrance.FragranceByGender gender, out Fragrance.FragranceType type))
       {
-        Console.WriteLine("Neplatná koncentrace vůně. Zadejte Kolínská, EDT, EDP nebo Parfém.");
-        return;
-      }
-      if (!Enum.TryParse(parts[2].Trim(), true, out Fragrance.FragranceByGender gender))
-      {
-        Console.WriteLine("Neplatné pohlaví. Zadejte dámská, pánská nebo unisex.");
-        return;
-      }
-      if (!Enum.TryParse(parts[3].Trim(), true, out Fragrance.FragranceType type))
-      {
-        Console.WriteLine("Neplatný typ vůně. Zadejte květinová, ovocná, citrusová, bylinná, mořská, orientální, pižmová, zemní, kouřová, kořeněná nebo dřevitá.");
         return;
       }
       List<string> components = parts.Skip(4).Select(c => c.Trim()).Where(c => !string.IsNullOrWhiteSpace(c)).ToList(); // Složky vůně začínají od indexu 4
@@ -177,9 +167,35 @@ namespace Vyhledavac_vuni
       Console.WriteLine($"Vůně '{newFragrance.Name}' byla úspěšně přidána.");
     }
 
+
+
+    private static bool TryParseToEnumUserInput(string[] parts, out Fragrance.FragranceConcentration concentration, out Fragrance.FragranceByGender gender, out Fragrance.FragranceType type)
+    {
+      if (!Enum.TryParse(parts[1].Trim(), true, out concentration))
+      {
+        Console.WriteLine("Neplatná koncentrace vůně. Zadejte Kolínská, EDT, EDP nebo Parfém.");
+        gender = default;
+        type = default;
+        return false;
+      }
+      if (!Enum.TryParse(parts[2].Trim(), true, out gender))
+      {
+        Console.WriteLine("Neplatné pohlaví. Zadejte dámská, pánská nebo unisex.");
+        type = default;
+        return false;
+      }
+      if (!Enum.TryParse(parts[3].Trim(), true, out type))
+      {
+        Console.WriteLine("Neplatný typ vůně. Zadejte květinová, ovocná, citrusová, bylinná, mořská, orientální, pižmová, zemní, kouřová, kořeněná nebo dřevitá.");
+        return false;
+      }
+
+      return true;
+    }
+
     // 3. metoda pro menu odstranění vůně:
-    
-    //Bude doplněno v další verzi. Po nahrazení SeedData za soubor s vůněmi. 
+
+    //Bude doplněno v další verzi.  
     // 4. metoda pro menu výpis názvů vůní:
     public static void PrintFragrancesNames()
     {
@@ -195,8 +211,8 @@ namespace Vyhledavac_vuni
       }
     }
     // 5. metoda pro menu uložení změn:
-    //Bude doplněno v další verzi. Po nahrazení SeedData za soubor s vůněmi.
+    //Bude doplněno v další verzi. 
 
 
- }
+  }
 }
